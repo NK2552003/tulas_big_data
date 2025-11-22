@@ -285,6 +285,7 @@ Run:
 hadoop jar hadoop-streaming.jar -mapper mapper.py -reducer reducer.py
 ```
 
+
 ## **3. Java MapReduce (Professional way)**
 
 Write full Java classes for mapper & reducer.
