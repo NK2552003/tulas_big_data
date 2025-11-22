@@ -37,13 +37,13 @@ brew update
 ### Install Java (Hadoop requires JDK 8 or 11)
 
 ```bash
-brew install openjdk@11
+brew install openjdk@17
 ```
 
 ### Set JAVA_HOME
 
 ```bash
-echo 'export JAVA_HOME="$(brew --prefix openjdk@11)"' >> ~/.zshrc
+echo 'export JAVA_HOME="$(brew --prefix openjdk@17)"' >> ~/.zshrc
 source ~/.zshrc
 ```
 

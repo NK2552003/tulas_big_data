@@ -32,18 +32,16 @@ This is why Big Data systems use HDFS.
 
 Very simple to visualize:
 
-```
-                +--------------------+
-                |      NameNode      |
-                |  (Master Server)   |
-                +--------------------+
-                          |
-       -------------------------------------------------
-       |                       |                       |
-+--------------+      +--------------+        +--------------+
-|  DataNode 1  |      |  DataNode 2  |        |  DataNode 3  |
-+--------------+      +--------------+        +--------------+
-
+```mermaid
+graph TD
+    A[NameNode<br/>Master Server] --> B[DataNode 1]
+    A --> C[DataNode 2]
+    A --> D[DataNode 3]
+    
+    style A fill:#ff9999,stroke:#333,stroke-width:3px
+    style B fill:#99ccff,stroke:#333,stroke-width:2px
+    style C fill:#99ccff,stroke:#333,stroke-width:2px
+    style D fill:#99ccff,stroke:#333,stroke-width:2px
 ```
 
 ## **NameNode**

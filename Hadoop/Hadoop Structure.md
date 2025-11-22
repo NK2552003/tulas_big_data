@@ -1,6 +1,6 @@
 # Hadoop Structure
 
-When you install Hadoop on Linux/WSL, all files usually go inside a single root folder (like `/usr/local/hadoop` or `/opt/hadoop`).
+When you install Hadoop on Linux/WSL, all files usually go inside a single root folder (like `/usr/local/hadoop` or `/opt/hadoop` or `/opt/homebrew/opt/hadoop`).
 
 For example, if Hadoop is installed at:
 

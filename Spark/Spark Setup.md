@@ -10,6 +10,9 @@ We follow these principles:
 
 This is the exact setup used in real Hadoop + Spark environments.
 
+`
+If you are in MAC you don't have to do the given steps below as it was already configured in [Hadoop_Installation(for Mac).md](../Hadoop_Installation(for Mac).md) file. Just navigate to (7th Point in this file to test the connectivity and working)
+`
 # **1. Download Spark in a Temporary Folder (`/tmp`)**
 
 ### Why `/tmp`?
@@ -143,11 +146,19 @@ If the interactive shell opens, Spark is successfully installed.
 # **9. Test Spark ↔ HDFS connection**
 
 Inside `spark-shell`:
-
+- For Windows
 ```scala
 val data = sc.textFile("hdfs:///data/data.csv")
 data.take(5)
-
 ```
+
+- For Mac
+```scala
+val data = sc.textFile("hdfs://localhost:9000/<foldername>/data.csv")
+data.take(5)
+# check the <foldername> using "hdfs dfs -ls /"
+# you'll see something like "/nitish/data.csv" or "/data.csv"
+```
+
 
 If this prints lines from HDFS → Spark is now replacing MapReduce.
