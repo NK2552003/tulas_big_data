@@ -129,16 +129,16 @@ mkdir -p ~/hadoop_tmp/hdfs/datanode
 "
 
 echo ">>> Formatting NameNode..."
-sudo -u hadoop hdfs namenode -format
+sudo -u hadoop /home/hadoop/hadoop/bin/hdfs namenode -format
 
 echo ">>> Starting Hadoop (DFS)..."
-sudo -u hadoop start-dfs.sh
+sudo -u hadoop /home/hadoop/hadoop/sbin/start-dfs.sh
 
 echo ">>> Starting YARN..."
-sudo -u hadoop start-yarn.sh
+sudo -u hadoop /home/hadoop/hadoop/sbin/start-yarn.sh
 
 echo ">>> Displaying running processes..."
-sudo -u hadoop jps
+sudo -u hadoop $JAVA_HOME_PATH/bin/jps
 
 echo ""
 echo "=============================================="
