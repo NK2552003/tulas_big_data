@@ -27,8 +27,8 @@ HADOOP_DIR="/Users/$USER_NAME/hadoop"
 echo ">>> Updating Homebrew..."
 brew update
 
-echo ">>> Installing Java 17..."
-brew install openjdk@17
+echo ">>> Installing Java 21..."
+brew install openjdk@21
 
 echo ">>> Installing Hadoop & Spark..."
 brew install hadoop
@@ -44,13 +44,13 @@ echo "SPARK_HOME: $SPARK_HOME"
 echo ">>> Setting environment variables..."
 # Remove old Hadoop/Spark entries to prevent duplicates
 sed -i.bak '/# Hadoop & Spark ENV/,/SPARK_HOME\/bin/d' ~/.zshrc
-sed -i.bak '/export JAVA_HOME.*openjdk@17/d' ~/.zshrc
+sed -i.bak '/export JAVA_HOME.*openjdk@21/d' ~/.zshrc
 
 # Add fresh environment variables
 cat <<EOF >> ~/.zshrc
 
 # Java Environment
-export JAVA_HOME="\$(brew --prefix openjdk@17)"
+export JAVA_HOME="\$(brew --prefix openjdk@21)"
 
 # Hadoop & Spark Environment
 export HADOOP_HOME=\$(brew --prefix hadoop)/libexec
@@ -58,8 +58,10 @@ export SPARK_HOME=\$(brew --prefix apache-spark)/libexec
 export PATH=\$PATH:\$HADOOP_HOME/bin:\$HADOOP_HOME/sbin:\$SPARK_HOME/bin
 EOF
 
+source ~/.zshrc
+
 echo ">>> Loading environment variables for current session..."
-export JAVA_HOME="$(brew --prefix openjdk@17)"
+export JAVA_HOME="$(brew --prefix openjdk@21)"
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$SPARK_HOME/bin
 
 echo ">>> Enabling SSH Remote Login..."
@@ -150,6 +152,17 @@ cat <<EOF > $HADOOP_HOME/etc/hadoop/yarn-site.xml
 </configuration>
 EOF
 
+echo ">>> Configuring hadoop-env.sh with JAVA_HOME..."
+if [ -f "$HADOOP_HOME/etc/hadoop/hadoop-env.sh" ]; then
+    # Remove any existing JAVA_HOME lines
+    sed -i.bak '/^export JAVA_HOME=/d' $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    # Add JAVA_HOME to hadoop-env.sh
+    echo "export JAVA_HOME=\"\$(brew --prefix openjdk@21)\"" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+    echo "JAVA_HOME set in hadoop-env.sh: $(brew --prefix openjdk@21)"
+else
+    echo "Warning: hadoop-env.sh not found at $HADOOP_HOME/etc/hadoop/hadoop-env.sh"
+fi
+
 echo ">>> Formatting NameNode..."
 hdfs namenode -format
 
@@ -176,4 +189,7 @@ echo "---------------------------------------------"
 echo "Run next time:"
 echo "   start-dfs.sh"
 echo "   start-yarn.sh"
+echo "---------------------------------------------"
+echo " if it doesn't run or display errors check the java version, reinstall it, add it to path:"
+echo " export JAVA_HOME=\"\$(brew --prefix openjdk@21)\""
 echo "---------------------------------------------"
