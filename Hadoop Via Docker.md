@@ -17,8 +17,9 @@ Open your terminal and clone the repository that contains the `docker-compose.ym
 
 Bash
 
-`git clone https://github.com/big-data-europe/docker-hadoop.git
-cd docker-hadoop`
+`git clone https://github.com/big-data-europe/docker-hadoop.git`
+
+`cd docker-hadoop`
 
 ### Step 2.2: Start the Cluster
 
